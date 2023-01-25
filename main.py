@@ -27,12 +27,19 @@ def get_data(soup):
                 title = book.find('h4').text.strip()
                 print(title)
             except AttributeError:
-                title = ''
+                del title
+                # title = ''
             try:
                 url = book.find('a', class_='books-list-image').get('href')
                 url = urljoin('https://samolit.com/books', url)
             except:
-                url = ''
+                del url
+                # url = ''
+                
+                
+            if title == '' or url =='':
+                continue
+                
             write_csv({
                 'title': title,
                 'url': url
